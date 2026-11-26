@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#fff8ef;
+ color:#642b24;
+ text-align:center;
+ font-family:Georgia,serif;
+ overflow-x:hidden;
+}
+.hero{
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:25px;
+ background:linear-gradient(135deg,#600b16,#a52a35,#4b1018);
+ color:#ffe7ae;
+}
+.card{
+ border:2px solid #d9b45b;
+ outline:1px solid #d9b45b;
+ outline-offset:7px;
+ padding:40px 22px;
+ width:100%;
+ max-width:500px;
+ border-radius:170px 170px 20px 20px;
+}
+.small{letter-spacing:4px;font-size:13px}
+h1{font-size:44px;color:#f6d78a}
+h2{color:#8c2530}
+.amp{font-size:45px;color:#e7c46d}
+.btn{
+ display:inline-block;
+ background:#8b1e2d;
+ color:#fff4d4;
+ padding:14px 24px;
+ margin:10px;
+ border-radius:30px;
+ border:1px solid #d6ad50;
+ text-decoration:none;
+ cursor:pointer;
+ font-size:16px;
+}
+section{padding:55px 20px}
+.box{
+ max-width:500px;
+ margin:20px auto;
+ padding:25px;
+ border:1px solid #d6ad50;
+ border-radius:20px;
+ background:#fffdf8;
+ box-shadow:0 6px 20px #00000010;
+}
+img{
+ width:100%;
+ max-width:350px;
+ border-radius:15px;
+}
+#petals{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ overflow:hidden;
+ z-index:99;
+}
+.petal{
+ position:absolute;
+ top:-30px;
+ animation:fall linear infinite;
+}
+@keyframes fall{
+ 0%{transform:translateY(-10vh) rotate(0deg)}
+ 100%{transform:translateY(110vh) rotate(720deg)}
+}
+footer{padding:35px;background:#600b16;color:#ffe7ae}
+</style>
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<header class="hero">
+ <div class="card">
+  <div class="small">॥ शुभ विवाह ॥</div>
+  <p>आप सादर आमंत्रित हैं</p>
+  <h1 id="groom">दूल्हे का नाम</h1>
+  <div class="amp">&</div>
+  <h1 id="bride">दुल्हन का नाम</h1>
+  <p>हमारे विवाह समारोह में आपका स्वागत है</p>
+  <h2 id="dateText">शादी की तारीख</h2>
+  <button class="btn" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'})">
+  निमंत्रण खोलें ↓
+  </button>
+ </div>
+</header>
+
+<section>
+ <h2>हमारे खास दिन तक</h2>
+ <div class="box">
+  <h2 id="countdown">जल्द ही...</h2>
+ </div>
+</section>
+
+<section>
+ <h2>दूल्हा और दुल्हन</h2>
+ <div class="box">
+  <p>दूल्हे की फोटो</p>
+  <img src="https://placehold.co/400x500?text=Groom+Photo" alt="Groom">
+  <h2 id="groom2">दूल्हे का नाम</h2>
+  <p>♥</p>
+  <p>दुल्हन की फोटो</p>
+  <img src="https://placehold.co/400x500?text=Bride+Photo" alt="Bride">
+  <h2 id="bride2">दुल्हन का नाम</h2>
+ </div>
+</section>
+
+<section id="details">
+ <h2>शादी समारोह</h2>
+ <div class="box">
+  <h2>शुभ विवाह</h2>
+  <p id="eventDate">तारीख यहाँ लिखें</p>
+  <p id="eventTime">समय यहाँ लिखें</p>
+  <p id="venue">शादी का स्थान यहाँ लिखें</p>
+  <a class="btn" id="mapBtn" href="https://maps.google.com" target="_blank">
+  📍 Google Maps पर देखें
+  </a>
+ </div>
+
+ <div class="box">
+  <h2>कार्यक्रम</h2>
+  <p id="program1">कार्यक्रम 1</p>
+  <p id="program2">कार्यक्रम 2</p>
+  <p id="program3">कार्यक्रम 3</p>
+ </div>
+</section>
+
+<section>
+ <h2>संगीत</h2>
+ <div class="box">
+  <input type="file" id="songFile" accept="audio/*">
+  <br>
+  <button class="btn" onclick="toggleMusic()">♫ संगीत चलाएँ / रोकें</button>
+  <audio id="music" loop></audio>
+  <p>अपना गाना चुनकर चलाएँ</p>
+ </div>
+</section>
+
+<section>
+ <h2>आपका स्वागत है</h2>
+ <p>आपकी उपस्थिति हमारे लिए सौभाग्य होगी ❤️</p>
+ <button class="btn" onclick="shareCard()">WhatsApp पर शेयर करें</button>
+</section>
+
+<footer>
+ <h2>♥ शुभ विवाह ♥</h2>
+ <p>आप सभी का हार्दिक स्वागत है</p>
+</footer>
+
+<script>
+// फूलों की बारिश
+const petals=document.getElementById('petals');
+for(let i=0;i<35;i++){
+ let p=document.createElement('div');
+ p.className='petal';
+ p.innerHTML=['🌸','🌺','🌼','💮'][Math.floor(Math.random()*4)];
+ p.style.left=Math.random()*100+'%';
+ p.style.animationDuration=(5+Math.random()*8)+'s';
+ p.style.animationDelay=Math.random()*8+'s';
+ p.style.fontSize=(14+Math.random()*20)+'px';
+ petals.appendChild(p);
+}
+
+// अपना गाना चुनें
+const music=document.getElementById('music');
+document.getElementById('songFile').addEventListener('change',function(){
+ if(this.files[0]){
+ music.src=URL.createObjectURL(this.files[0]);
+ music.play();
+ }
+});
+function toggleMusic(){
+ if(!music.src){
+ alert('पहले अपना गाना चुनें');
+ return;
+ }
+ if(music.paused)music.play();
+ else music.pause();
+}
+
+// WhatsApp शेयर
+function shareCard(){
+ let msg='आप सादर आमंत्रित हैं हमारे विवाह समारोह में ❤️';
+ window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+</body>
+</html>
