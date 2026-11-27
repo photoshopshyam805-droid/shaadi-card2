@@ -1,0 +1,10 @@
+# Plain static site: a single hand-written HTML file, no framework or build step.
+[build]
+  publish = "."
+  command = ""
+
+# The page is named indexa.html (there is no index.html), so serve it at the site root.
+[[redirects]]
+  from = "/"
+  to = "/indexa.html"
+  status = 200
